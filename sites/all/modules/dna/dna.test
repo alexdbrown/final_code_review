@@ -1,6 +1,6 @@
 <?php
 
-class DNATestCase extends DrupalUnitTestCase
+class dnaTestCase extends DrupalUnitTestCase
 {
     public static function getInfo()
     {
@@ -11,7 +11,7 @@ class DNATestCase extends DrupalUnitTestCase
         );
     }
 
-    function testDNA() {
+    function testDna() {
         $description = 'A user enters A and a T is returned.';
         $input = 'A';
         $result = make_dna_work($input);
@@ -37,4 +37,38 @@ class DNATestCase extends DrupalUnitTestCase
         $this->assertEqual($result, $expected_output, $description);
 
     }
+}
+
+class dnatestcase extends DrupalWebTestCase {
+    public static function getInfo() {
+        return array(
+            'name' => 'Dna Tests',
+            'description' => 'Test that DNA module functions properly.',
+            'group' => 'Epicodus Example Tests',
+        );
+    }
+
+    //arrange
+    public function setUp() {
+        parent::setUp($array('dna'));
+        }
+    }
+
+    public function testDnaPage() {
+        //act - pass info into form
+        $info['input'] = "ATCG";
+
+        //act = submit form with info
+        $this->drupalPost('dna', $info, t("Make DNA Work"));
+
+        //assert - get page results
+        $this->assertText("TAGC", "it works!");
+    }
+
+    public function testInputValidation() {
+        $info['input'] = "dflsa";
+        $this->drupalPost('dna', $info, t("Make DNA Work"));
+        $this->assertText("Please only enter a valid element ('A', 'T', 'C', 'G')", "Input validation works!");
+    }
+
 }
