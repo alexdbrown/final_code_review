@@ -11,7 +11,6 @@ function mymodule_menu() {
 
 function mymodule_ajax_callback($js, $node_id) {
     $node = node_load($node_id);
-}
 
     if ($js == 'nojs') {
         drupal_goto('node/' . $node->nid);
@@ -21,7 +20,8 @@ function mymodule_ajax_callback($js, $node_id) {
     $html = render($build);
 
     $commands = array();
-    $commands[] = ajax_command_html('#mymode-ajax-wrapper', $html);
+    $commands[] = ajax_command_html('#mymodule-ajax-wrapper', $html);
 
     print ajax_render($commands);
     exit;
+}
