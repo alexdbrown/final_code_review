@@ -1,0 +1,40 @@
+<?php
+
+class DNATestCase extends DrupalUnitTestCase
+{
+    public static function getInfo()
+    {
+        return array(
+            'name' => 'DNA Tests',
+            'description' => 'Test that DNA module functions properly.',
+            'group' => 'Epicodus Example Tests',
+        );
+    }
+
+    function testDNA() {
+        $description = 'A user enters A and a T is returned.';
+        $input = 'A';
+        $result = make_dna_work($input);
+        $expected_output = 'T';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'A user enters T and a A is returned.';
+        $input = 'T';
+        $result = make_dna_work($input);
+        $expected_output = 'A';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'A user enters C and a G is returned.';
+        $input = 'C';
+        $result = make_dna_work($input);
+        $expected_output = 'G';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = 'A user enters G and a C is returned.';
+        $input = 'G';
+        $result = make_dna_work($input);
+        $expected_output = 'C';
+        $this->assertEqual($result, $expected_output, $description);
+
+    }
+}
