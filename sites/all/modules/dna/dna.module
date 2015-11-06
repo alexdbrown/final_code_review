@@ -23,7 +23,7 @@ function dna_form() {
     $form['input'] = array(
         '#title' => 'Enter one half of your DNA helix',
         '#type' => 'textfield',
-        // '#element_validate' => array('element_validate_dna'),
+        '#element_validate' => array('element_validate_dna'),
         '#required' => TRUE,
     );
 
@@ -35,35 +35,40 @@ function dna_form() {
     return $form;
 }
 
-// function element_validate_dna($element) {
-//     $valid_input = array('A', 'T', 'C', 'G');
-//     if (!(in_array(strtoupper($element['#value']), $valid_input))) {
-//         form_error($element, t("Please only enter a valid element ('A', 'T', 'C', 'G')"));
-//     }
-// }
+function element_validate_dna($element) {
+    $input_value = strtoupper($element['#value']);
+    $split_value = str_split($input_value);
+    $valid_inputs = array('A', 'T', 'C', 'G');
+
+    foreach ($split_value as $input) {
+        if (!in_array($input, $valid_inputs)) {
+        form_error($element, t("Please only enter a valid element ('A', 'T', 'C', 'G')"));
+        }
+    }
+}
 
 function make_dna_work($input) {
     $input_uppercase = strtoupper($input);
-    $input_exploded = explode(' ', $input_uppercase);
+    $input_exploded = str_split($input_uppercase);
     $new_DNA = '';
     $output_DNA = [];
     foreach ($input_exploded as $DNA) {
         if ($DNA === 'A') {
-            $new_DNA === 'T';
+            $new_DNA = 'T';
             array_push($output_DNA, $new_DNA);
         } elseif ($DNA === 'T') {
-            $new_DNA === 'A';
+            $new_DNA = 'A';
             array_push($output_DNA, $new_DNA);
         } elseif ($DNA === 'C') {
-            $new_DNA === 'G';
+            $new_DNA = 'G';
             array_push($output_DNA, $new_DNA);
         } elseif ($DNA === 'G') {
-            $new_DNA === 'C';
+            $new_DNA = 'C';
             array_push($output_DNA, $new_DNA);
         }
     }
 
-    return implode(' ', $output_DNA);
+    return implode($output_DNA);
 }
 
 function dna_form_submit($form, &$form_state) {

@@ -1,6 +1,6 @@
 <?php
 
-class dnaTestCase extends DrupalUnitTestCase
+class DNATestCase extends DrupalUnitTestCase
 {
     public static function getInfo()
     {
@@ -11,7 +11,7 @@ class dnaTestCase extends DrupalUnitTestCase
         );
     }
 
-    function testDna() {
+    function testDNA() {
         $description = 'A user enters A and a T is returned.';
         $input = 'A';
         $result = make_dna_work($input);
@@ -39,7 +39,7 @@ class dnaTestCase extends DrupalUnitTestCase
     }
 }
 
-class dnatestcase extends DrupalWebTestCase {
+class DNAtests extends DrupalWebTestCase {
     public static function getInfo() {
         return array(
             'name' => 'Dna Tests',
@@ -50,7 +50,7 @@ class dnatestcase extends DrupalWebTestCase {
 
     //arrange
     public function setUp() {
-        parent::setUp($array('dna'));
+        parent::setUp(array('dna'));
         }
     }
 
