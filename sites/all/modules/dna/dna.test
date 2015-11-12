@@ -52,7 +52,7 @@ class DNAtests extends DrupalWebTestCase {
     public function setUp() {
         parent::setUp(array('dna'));
         }
-    }
+
 
     public function testDnaPage() {
         //act - pass info into form
